@@ -22,15 +22,15 @@ const useCustomerOrders = (userId: string) => {
     }));
 
     const customerOrders = orders.filter(
-      (order) => order.trackingItems.customer_id == userId
+      (order) => order.trackingItems.customer_id === userId
     );
     setOrders(customerOrders);
-  }, [data]);
+  }, [data, userId]);
 
   return {
-    orders,
     loading,
     error,
+    orders,
   };
 };
 

@@ -24,9 +24,9 @@ const useOrders = () => {
   }, [data]);
 
   return {
-    orders,
     loading,
     error,
+    orders
   }
 };
 

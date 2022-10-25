@@ -5,6 +5,7 @@ import {
   useNavigation,
 } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { Image } from "@rneui/base";
 import { Input } from "@rneui/themed";
 import React, { useLayoutEffect, useState } from "react";
@@ -15,13 +16,14 @@ import {
   Text,
 } from "react-native";
 import { useTailwind } from "tailwind-rn";
+import CustomerCard from "../components/CustomerCard";
 import { GET_CUSTOMERS } from "../graphql/queries";
 import { RootStackParamList } from "../navigator/RootNavigator";
 import { TabStackParamList } from "../navigator/TabNavigator";
 
 export type CustomersNavigationProps = CompositeNavigationProp<
   BottomTabNavigationProp<TabStackParamList, "Customers">,
-  NativeStackNavigationProp<RootStackParamList>
+  StackNavigationProp<RootStackParamList>
 >;
 
 function CustomersScreen() {
@@ -29,9 +31,6 @@ function CustomersScreen() {
   const navigation = useNavigation<CustomersNavigationProps>();
   const [input, setInput] = useState<string>("");
   const { loading, error, data } = useQuery(GET_CUSTOMERS);
-
-  console.log(data);
-  
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -52,6 +51,13 @@ function CustomersScreen() {
         value={input}
         onChangeText={setInput}
       />
+      {data?.getCustomers
+        ?.filter((customer: CustomerList) =>
+          customer.value.name.toLowerCase().includes(input.toLowerCase())
+        )
+        .map(({ name: ID, value: { name, email } }: CustomerResponse) => (
+          <CustomerCard key={ID} name={name} email={email} userId={ID} />
+        ))}
     </ScrollView>
   );
 }

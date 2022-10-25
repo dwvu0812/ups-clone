@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 
 export const GET_ORDERS = gql`
-  query GetOrders   {
+  query MyQuery   {
     getOrders {
       name
       value {
@@ -32,7 +32,7 @@ export const GET_ORDERS = gql`
 `;
 
 export const GET_CUSTOMERS = gql`
-  query GetCustomers   {
+  query MyQuery   {
     getCustomers {
       name
       value {

@@ -12,8 +12,11 @@ import {
   gql,
 } from "@apollo/client";
 
+const LOCAL_SYSTEM_IP_ADDRESS = '192.168.1.222';
+const PORT = '5001';
+
 const client = new ApolloClient({
-  uri: "http://localhost:5001/api/wishing-ocelot",
+  uri: `http://${LOCAL_SYSTEM_IP_ADDRESS}:${PORT}/api/wishing-ocelot`,
   cache: new InMemoryCache(),
 });
 

@@ -26,7 +26,7 @@ type OrderList = {
 };
 
 type Items = {
-  item_id: number;
+  item_id: ID;
   name: string;
   price: number;
   quantity: number;
@@ -48,6 +48,6 @@ type OrderResponse = {
 };
 
 type CustomerResponse = {
-  name: IDBCursor;
+  name: ID;
   value: Customer;
 };
